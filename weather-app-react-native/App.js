@@ -40,7 +40,3 @@ const styles = StyleSheet.create({
   },
 });
 
-import * as Location from 'expo-location';
-
-import * as Location from 'expo-location';
-
