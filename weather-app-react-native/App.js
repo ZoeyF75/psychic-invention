@@ -4,10 +4,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location';
 const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?';
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+import Weatherinfo from './components/Weatherinfo';
 
 export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [currentWeather, setCurrentWeather] = useState(null);
+  const [unitsSystem, setunitsSystem] = useState('metric'); //metric => C imperial => F
   useEffect(() => {
     load();
   }, []);
@@ -22,23 +24,24 @@ export default function App() {
       }
       const location = await Location.getCurrentPositionAsync();
       const {latitude, longitude} = location.coords; //coords is property of location object from async function
-      const weatherURL = `${BASE_WEATHER_URL}lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`;
+      const weatherURL = `${BASE_WEATHER_URL}lat=${latitude}&lon=${longitude}&units=${unitsSystem}&appid=${WEATHER_API_KEY}`;
       const response = await fetch(weatherURL);
       const result = await response.json();
       response.ok ? setCurrentWeather(result) : setErrorMessage(result.message); //if 200 else server message
     
     }
     catch (error) {
-      console.log('error with try catch location')
+      setErrorMessage(error.message);
     }
   }
 
   if (currentWeather) {
-    const { main : { temp }} = currentWeather;
     return (
       <View style={styles.container}>
-        <Text>temperature: {temp}</Text>
         <StatusBar style="auto" />
+        <View style={styles.main}>
+          <Weatherinfo currentWeather={currentWeather}/>
+        </View>
       </View>
     );
   } else {
@@ -55,8 +58,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
   },
+  main: {
+    justifyContent: 'center',
+    flex: 1,
+  }
 });
 
