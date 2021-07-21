@@ -2,7 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location';
-
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?';
 export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   
@@ -20,7 +21,7 @@ export default function App() {
       }
       const location = await Location.getCurrentPositionAsync();
       const {latitude, longitude} = location.coords; //coords is property of location object from async function
-      alert(`Latitude: ${latitude}, Longitude: ${longitude}`)
+      const weatherURL = `${BASE_WEATHER_URL}lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`;
     }
     catch (error) {
       console.log('error with try catch location')
