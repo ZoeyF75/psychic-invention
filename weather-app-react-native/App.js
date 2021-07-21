@@ -18,6 +18,9 @@ export default function App() {
           setErrorMessage('Access to location is needed to run the app')
           return
       }
+      const location = await Location.getCurrentPositionAsync();
+      const {latitude, longitude} = location.coords; //coords is property of location object from async function
+      alert(`Latitude: ${latitude}, Longitude: ${longitude}`)
     }
     catch (error) {
       console.log('error with try catch location')
