@@ -1,11 +1,31 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 
 export default function Weatherinfo({ currentWeather }) {
-  const { main : { temp }} = currentWeather;
+  
+  const { 
+    main : { temp },
+    weather: [details],
+  } = currentWeather;
+
+  const { icon } = details;
+
+  const iconUrl = `https://openweathermap.org/img/wn/${icon}@4x.png`;
+
   return (
-    <View>
+    <View style={styles.weatherInfo}>
+      <Image style={styles.weatherIcon} source={{ url: iconUrl }} />
       <Text>{temp}</Text>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  weatherInfo: {
+    alignItems: 'center',
+  },
+  weatherIcon: {
+    width: 100,
+    height: 100,
+  }
+});
