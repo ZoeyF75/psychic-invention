@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?';
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 import Weatherinfo from './components/Weatherinfo';
+import UnitsPicker from './components/UnitsPicker';
 
 export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -40,6 +41,7 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar style="auto" />
         <View style={styles.main}>
+          <UnitsPicker />
           <Weatherinfo currentWeather={currentWeather}/>
         </View>
       </View>
