@@ -10,10 +10,10 @@ import UnitsPicker from './components/UnitsPicker';
 export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [currentWeather, setCurrentWeather] = useState(null);
-  const [unitsSystem, setunitsSystem] = useState('metric'); //metric => C imperial => F
+  const [unitsSystem, setUnitsSystem] = useState('metric'); //metric => C imperial => F
   useEffect(() => {
     load();
-  }, []);
+  }, [unitsSystem]);
 
   async function load() {
     setErrorMessage(null);
@@ -41,7 +41,7 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar style="auto" />
         <View style={styles.main}>
-          <UnitsPicker />
+          <UnitsPicker unitsSystem={unitsSystem} setUnitsSystem={setUnitsSystem} />
           <Weatherinfo currentWeather={currentWeather}/>
         </View>
       </View>
