@@ -16,6 +16,7 @@ export default function App() {
   }, [unitsSystem]);
 
   async function load() {
+    setCurrentWeather(null); //just in case
     setErrorMessage(null);
     try {
       let { status } = await Location.requestForegroundPermissionsAsync();
