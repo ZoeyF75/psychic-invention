@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator  } from 'react-native';
 import * as Location from 'expo-location';
 const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?';
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
@@ -47,13 +47,20 @@ export default function App() {
         </View>
       </View>
     );
-  } else {
+  } else if (errorMessage) {
     return (
       <View style={styles.container}>
         <Text>{errorMessage}</Text>
         <StatusBar style="auto" />
       </View>
     );
+  } else {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator />
+        <StatusBar style="auto" />
+      </View>
+    )
   }
 }
 
