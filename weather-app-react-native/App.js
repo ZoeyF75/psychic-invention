@@ -6,6 +6,7 @@ const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?';
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 import Weatherinfo from './components/Weatherinfo';
 import UnitsPicker from './components/UnitsPicker';
+import { colors } from './utils/index';
 
 export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -57,7 +58,7 @@ export default function App() {
   } else {
     return (
       <View style={styles.container}>
-        <ActivityIndicator />
+        <ActivityIndicator size="large" color={colors.PRIMARY_COLOR}/>
         <StatusBar style="auto" />
       </View>
     )
