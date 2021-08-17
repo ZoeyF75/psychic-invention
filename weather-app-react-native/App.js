@@ -7,6 +7,7 @@ const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 import Weatherinfo from './components/Weatherinfo';
 import UnitsPicker from './components/UnitsPicker';
 import { colors } from './utils/index';
+import ReloadIcon from './components/ReloadIcon';
 
 export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -44,6 +45,7 @@ export default function App() {
         <StatusBar style="auto" />
         <View style={styles.main}>
           <UnitsPicker unitsSystem={unitsSystem} setUnitsSystem={setUnitsSystem} />
+          <ReloadIcon load={load}/>
           <Weatherinfo currentWeather={currentWeather}/>
         </View>
       </View>
